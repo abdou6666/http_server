@@ -8,7 +8,18 @@ const server = net.createServer((socket) => {
         }
         else if (request.includes("/echo/")) {
             const content = request.split("/echo/")[1];
-            socket.write(`HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${content.length}\r\n\r\n${content}`);
+
+            // console.log(content.length);
+            let endpoint = '';
+            for (let i = 0; i < content.length; i++) {
+                if (content[i] === ' ') {
+                    break;
+                }
+                endpoint += content[i];
+            }
+            const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${endpoint.length}\r\n\r\n${endpoint}`;
+            console.log({ response });
+            socket.write(response);
         }
         else {
             socket.write("HTTP/1.1 404 Not Found\r\n\r\n");
