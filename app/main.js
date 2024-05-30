@@ -8,16 +8,18 @@ const server = net.createServer((socket) => {
         } else if (request.includes("/user-agent")) {
 
             const splited = request.split('\n\r');
-
+            console.log(request);
             let index = splited[0].indexOf('User-Agent:');
             let agent = '';
             for (let i = index; i < i < splited[0].length; i++) {
-                agent += splited[0][i];
                 if (splited[0][i] === '\r') {
                     break;
                 }
+                agent += splited[0][i];
+
             }
-            const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${agent.length}\r\n\r\n${agent}`;
+            let contentLength = agent.length - 12;
+            const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${contentLength}\r\n\r\n${agent}`;
 
 
             socket.write(response);
