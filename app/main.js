@@ -10,7 +10,7 @@ const server = net.createServer((socket) => {
 
         console.log(`Method: ${method}, URL: ${url}`);
 
-        const response = "HTTP/1.1 200 OK\r\n\r\n";
+        const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: 13\r\n\r\nHello, World!`;
 
         socket.write(response);
 
