@@ -18,6 +18,7 @@ const server = net.createServer((socket) => {
                 agent += splited[0][i];
 
             }
+            console.log({ agent });
             let contentLength = agent.length - 12;
             const response = `HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: ${contentLength}\r\n\r\n${agent}`;
 
