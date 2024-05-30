@@ -21,6 +21,9 @@ const server = net.createServer((socket) => {
         console.error('Socket error:', err);
     });
 
+    socket.on('close', () => {
+        console.log('Connection closed.');
+    });
 
 });
 server.listen(4221, "localhost");
